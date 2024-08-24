@@ -34,25 +34,29 @@ const generarNumeroAleatorio= (valorMaximo) =>{
     return numero;
 };
 
-const crearPokemon= (datosPokemon) => {
-    let tipo= datosPokemon.types[0].type.name;
+const crearPokemon= (pokemon) => {
+    let tipo= pokemon.types[0].type.name;
     let  div = document.createElement('div');
     let color= colores[tipo];
     let template=`
-        <div class="card" style='background-color:${color};'>
-        <div class="front">
-          <h3>${datosPokemon.name}</h3>   
-          <img  class="pokemon"  src="${datosPokemon.sprites.other.home.front_default}"/>    
-        </div> 
-        <div class="back">    
-          <img  class="pokemon"  src="${datosPokemon.sprites.other.home.front_default}"/>
-          <p>Tipo: ${tipo}</p>
-        </div>           
+        <div class='flip-card'>
+        <div class='flip-card-inner' style='background-color:${color};'>
+           <div class='flip-card-front'>
+           <img src="${pokemon.sprites.other.showdown.front_default}" alt="${pokemon.name}">
+           <h3 class= "name">${pokemon.name}</h3>
+           <small class="type">tipo: <span>${pokemon.types[0].type.name}</span></small>
+           </div>
+           <div class="flip-card-back">
+           <h3>${pokemon.name}</h3>
+
+           <p>altura: ${pokemon.height /10}m</p>
+           <p>peso: ${pokemon.weight /10} kg</p>
+           </div>
+       </div>
        </div>`;
 
-
-    div. innerHTML=template; 
-    contenedor.innerHTML="";
+    div.innerHTML=template; 
+    contenedor.innerHTML = "";
     contenedor.appendChild(div);
 
 };
@@ -75,7 +79,7 @@ function buscadorpokemon(){
 
         }
     } else {
-        // contenedor.innerHTML = "";
+       
         obtenerPokemon(id_pokemon);
     }
 };
